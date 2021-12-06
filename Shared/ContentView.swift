@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import WatchConnectivity
 
 struct ContentView: View {
+    @EnvironmentObject
+    private var chronos: Chronos
+
     var body: some View {
         NavigationView {
-            Text("Hello, worlds!")
-                .padding()
+            VStack {
+                Text("Hello, red! \(chronos.messageCount)")
+                Button(action: { chronos.sendWatchMessage() }) {
+                    Text("Send message")
+                        .foregroundColor(.accentColor)
+                }
+            }
         }
     }
 }

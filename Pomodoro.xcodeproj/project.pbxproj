@@ -23,6 +23,8 @@
 		2CC40509275D5202003FFD09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CC404C1275D507E003FFD09 /* Assets.xcassets */; };
 		2CC4050A275D5464003FFD09 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC404BF275D5077003FFD09 /* PomodoroApp.swift */; };
 		2CC4050B275D5475003FFD09 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC404C0275D5077003FFD09 /* ContentView.swift */; };
+		2CDAA592275EB1D9006EA58C /* Chronos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAA591275EB1D9006EA58C /* Chronos.swift */; };
+		2CDAA593275EB1D9006EA58C /* Chronos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CDAA591275EB1D9006EA58C /* Chronos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +85,7 @@
 		2CC404F9275D5131003FFD09 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2CC404FB275D5131003FFD09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2CC404FC275D5131003FFD09 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		2CDAA591275EB1D9006EA58C /* Chronos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chronos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,9 +125,10 @@
 		2CC404BE275D5077003FFD09 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				2CC404BF275D5077003FFD09 /* PomodoroApp.swift */,
 				2CC404C0275D5077003FFD09 /* ContentView.swift */,
+				2CC404BF275D5077003FFD09 /* PomodoroApp.swift */,
 				2CC404C1275D507E003FFD09 /* Assets.xcassets */,
+				2CDAA58F275EB143006EA58C /* Models */,
 				2CC404F8275D5131003FFD09 /* Preview Content */,
 			);
 			path = Shared;
@@ -177,14 +181,30 @@
 		2CC4050E275D5575003FFD09 /* WatchKit */ = {
 			isa = PBXGroup;
 			children = (
+				2CC404FC275D5131003FFD09 /* PushNotificationPayload.apns */,
+				2CC404FB275D5131003FFD09 /* Info.plist */,
+				2CC404F4275D512A003FFD09 /* ComplicationController.swift */,
 				2CC404F0275D512A003FFD09 /* NotificationController.swift */,
 				2CC404F2275D512A003FFD09 /* NotificationView.swift */,
-				2CC404F4275D512A003FFD09 /* ComplicationController.swift */,
 				2CC404F6275D5131003FFD09 /* Assets.xcassets */,
-				2CC404FB275D5131003FFD09 /* Info.plist */,
-				2CC404FC275D5131003FFD09 /* PushNotificationPayload.apns */,
 			);
 			path = WatchKit;
+			sourceTree = "<group>";
+		};
+		2CDAA58F275EB143006EA58C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2CDAA590275EB14D006EA58C /* ViewModels */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2CDAA590275EB14D006EA58C /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2CDAA591275EB1D9006EA58C /* Chronos.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -346,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CDAA592275EB1D9006EA58C /* Chronos.swift in Sources */,
 				2CC404D1275D507F003FFD09 /* ContentView.swift in Sources */,
 				2CC404CF275D507F003FFD09 /* PomodoroApp.swift in Sources */,
 			);
@@ -366,6 +387,7 @@
 			files = (
 				2CC4050A275D5464003FFD09 /* PomodoroApp.swift in Sources */,
 				2CC4050B275D5475003FFD09 /* ContentView.swift in Sources */,
+				2CDAA593275EB1D9006EA58C /* Chronos.swift in Sources */,
 				2CC404F1275D512A003FFD09 /* NotificationController.swift in Sources */,
 				2CC404F5275D512A003FFD09 /* ComplicationController.swift in Sources */,
 				2CC404F3275D512A003FFD09 /* NotificationView.swift in Sources */,
