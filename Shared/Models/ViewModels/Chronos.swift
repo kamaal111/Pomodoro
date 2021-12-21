@@ -10,7 +10,7 @@ import WatchConnectivity
 
 final class Chronos: NSObject, ObservableObject, WCSessionDelegate {
 
-    @Published private(set) var messageCount = 0
+    @Published private(set) var messages: [WCMessage] = []
 
     private var lastMessage: CFAbsoluteTime = 0
     private var session: WCSession?
@@ -50,9 +50,15 @@ final class Chronos: NSObject, ObservableObject, WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { }
 
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        print(message)
+        let encodedMessage: Data
+        do {
+            encodedMessage = try JSONSerialization.data(withJSONObject: message, options: .prettyPrinted)
+        } catch {
+            print(error)
+            return
+        }
         DispatchQueue.main.async { [weak self] in
-            self?.messageCount += 1
+            self?.messages.append(.init(id: UUID(), data: encodedMessage))
         }
     }
 

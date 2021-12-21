@@ -19,7 +19,8 @@ struct PomodoroApp: App {
         }
     }
     #else
-    @SceneBuilder var body: some Scene {
+    @SceneBuilder
+    var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(chronos)

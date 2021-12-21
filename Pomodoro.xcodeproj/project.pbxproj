@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C6F86D9277282AC00EFCEC0 /* WCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F86D8277282AC00EFCEC0 /* WCMessage.swift */; };
+		2C6F86DA277282AC00EFCEC0 /* WCMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C6F86D8277282AC00EFCEC0 /* WCMessage.swift */; };
 		2CC404CF275D507F003FFD09 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC404BF275D5077003FFD09 /* PomodoroApp.swift */; };
 		2CC404D0275D507F003FFD09 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC404BF275D5077003FFD09 /* PomodoroApp.swift */; };
 		2CC404D1275D507F003FFD09 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC404C0275D5077003FFD09 /* ContentView.swift */; };
@@ -70,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2C6F86D8277282AC00EFCEC0 /* WCMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WCMessage.swift; sourceTree = "<group>"; };
 		2CC404BF275D5077003FFD09 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
 		2CC404C0275D5077003FFD09 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2CC404C1275D507E003FFD09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C6F86D72772829000EFCEC0 /* Structures */ = {
+			isa = PBXGroup;
+			children = (
+				2C6F86D8277282AC00EFCEC0 /* WCMessage.swift */,
+			);
+			path = Structures;
+			sourceTree = "<group>";
+		};
 		2CC404B9275D5076003FFD09 = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +205,7 @@
 		2CDAA58F275EB143006EA58C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2C6F86D72772829000EFCEC0 /* Structures */,
 				2CDAA590275EB14D006EA58C /* ViewModels */,
 			);
 			path = Models;
@@ -367,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CDAA592275EB1D9006EA58C /* Chronos.swift in Sources */,
+				2C6F86D9277282AC00EFCEC0 /* WCMessage.swift in Sources */,
 				2CC404D1275D507F003FFD09 /* ContentView.swift in Sources */,
 				2CC404CF275D507F003FFD09 /* PomodoroApp.swift in Sources */,
 			);
@@ -391,6 +404,7 @@
 				2CC404F1275D512A003FFD09 /* NotificationController.swift in Sources */,
 				2CC404F5275D512A003FFD09 /* ComplicationController.swift in Sources */,
 				2CC404F3275D512A003FFD09 /* NotificationView.swift in Sources */,
+				2C6F86DA277282AC00EFCEC0 /* WCMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

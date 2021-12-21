@@ -14,11 +14,13 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Hello, red! \(chronos.messageCount)")
+            ScrollView {
                 Button(action: { chronos.sendWatchMessage() }) {
                     Text("Send message")
                         .foregroundColor(.accentColor)
+                }
+                ForEach(chronos.messages) { message in
+                    Text("\(message.data)")
                 }
             }
         }
