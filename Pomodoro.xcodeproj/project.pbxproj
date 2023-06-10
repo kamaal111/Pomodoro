@@ -8,20 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		2C77EF632A34CA43002492E8 /* PomodoroApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C77EF622A34CA43002492E8 /* PomodoroApp.swift */; };
-		2C77EF652A34CA43002492E8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C77EF642A34CA43002492E8 /* Item.swift */; };
 		2C77EF672A34CA43002492E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C77EF662A34CA43002492E8 /* ContentView.swift */; };
 		2C77EF692A34CA44002492E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C77EF682A34CA44002492E8 /* Assets.xcassets */; };
 		2C77EF6D2A34CA44002492E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C77EF6C2A34CA44002492E8 /* Preview Assets.xcassets */; };
+		2C78F22D2A352429003A97BF /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = 2C78F22C2A352429003A97BF /* Navigation */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2C77EF5F2A34CA43002492E8 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C77EF622A34CA43002492E8 /* PomodoroApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PomodoroApp.swift; sourceTree = "<group>"; };
-		2C77EF642A34CA43002492E8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		2C77EF662A34CA43002492E8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2C77EF682A34CA44002492E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2C77EF6A2A34CA44002492E8 /* Pomodoro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pomodoro.entitlements; sourceTree = "<group>"; };
 		2C77EF6C2A34CA44002492E8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2C78F2162A35145D003A97BF /* Pomodoro.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Pomodoro.xctestplan; sourceTree = "<group>"; };
+		2C78F2352A352AA4003A97BF /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Models; sourceTree = "<group>"; };
+		2C78F2362A352B0C003A97BF /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Navigation; sourceTree = "<group>"; };
+		2C78F2372A352D2D003A97BF /* Features */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Features; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C78F22D2A352429003A97BF /* Navigation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +42,11 @@
 		2C77EF562A34CA43002492E8 = {
 			isa = PBXGroup;
 			children = (
+				2C78F2172A35151C003A97BF /* Frameworks */,
+				2C78F22A2A352274003A97BF /* Modules */,
 				2C77EF612A34CA43002492E8 /* Pomodoro */,
 				2C77EF602A34CA43002492E8 /* Products */,
+				2C78F2132A35140C003A97BF /* Tests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,11 +61,10 @@
 		2C77EF612A34CA43002492E8 /* Pomodoro */ = {
 			isa = PBXGroup;
 			children = (
-				2C77EF622A34CA43002492E8 /* PomodoroApp.swift */,
-				2C77EF642A34CA43002492E8 /* Item.swift */,
-				2C77EF662A34CA43002492E8 /* ContentView.swift */,
-				2C77EF682A34CA44002492E8 /* Assets.xcassets */,
 				2C77EF6A2A34CA44002492E8 /* Pomodoro.entitlements */,
+				2C77EF662A34CA43002492E8 /* ContentView.swift */,
+				2C77EF622A34CA43002492E8 /* PomodoroApp.swift */,
+				2C77EF682A34CA44002492E8 /* Assets.xcassets */,
 				2C77EF6B2A34CA44002492E8 /* Preview Content */,
 			);
 			path = Pomodoro;
@@ -70,6 +76,31 @@
 				2C77EF6C2A34CA44002492E8 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		2C78F2132A35140C003A97BF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				2C78F2162A35145D003A97BF /* Pomodoro.xctestplan */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		2C78F2172A35151C003A97BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C78F22A2A352274003A97BF /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				2C78F2372A352D2D003A97BF /* Features */,
+				2C78F2352A352AA4003A97BF /* Models */,
+				2C78F2362A352B0C003A97BF /* Navigation */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -88,6 +119,9 @@
 			dependencies = (
 			);
 			name = Pomodoro;
+			packageProductDependencies = (
+				2C78F22C2A352429003A97BF /* Navigation */,
+			);
 			productName = Pomodoro;
 			productReference = 2C77EF5F2A34CA43002492E8 /* Pomodoro.app */;
 			productType = "com.apple.product-type.application";
@@ -116,6 +150,9 @@
 				Base,
 			);
 			mainGroup = 2C77EF562A34CA43002492E8;
+			packageReferences = (
+				2C78F2272A3521CD003A97BF /* XCRemoteSwiftPackageReference "KamaalSwift" */,
+			);
 			productRefGroup = 2C77EF602A34CA43002492E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -142,7 +179,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C77EF652A34CA43002492E8 /* Item.swift in Sources */,
 				2C77EF632A34CA43002492E8 /* PomodoroApp.swift in Sources */,
 				2C77EF672A34CA43002492E8 /* ContentView.swift in Sources */,
 			);
@@ -363,6 +399,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C78F2272A3521CD003A97BF /* XCRemoteSwiftPackageReference "KamaalSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kamaalio/KamaalSwift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C78F22C2A352429003A97BF /* Navigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Navigation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2C77EF572A34CA43002492E8 /* Project object */;
 }

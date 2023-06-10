@@ -1,0 +1,31 @@
+{
+  "configurations" : [
+    {
+      "id" : "812AB483-E5F6-4539-9A17-CFDFCA7D5934",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Models",
+        "identifier" : "ProtocolsTests",
+        "name" : "ProtocolsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:Modules\/Navigation",
+        "identifier" : "NavigationTests",
+        "name" : "NavigationTests"
+      }
+    }
+  ],
+  "version" : 1
+}
