@@ -6,6 +6,6 @@
 //
 
 import XCTest
-@testable import Models
+@testable import Protocols
 
 final class ProtocolsTests: XCTestCase { }

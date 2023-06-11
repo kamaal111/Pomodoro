@@ -24,6 +24,11 @@ public struct AppNavigationStack: View {
     }
 }
 
+#if DEBUG
+import FocusTimer
+
 #Preview {
     AppNavigationStack()
+        .focusTimerEnvironment()
 }
+#endif

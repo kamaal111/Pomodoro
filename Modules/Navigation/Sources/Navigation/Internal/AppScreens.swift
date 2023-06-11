@@ -18,9 +18,9 @@ enum AppScreens: Hashable, SelfIdentifiable, Codable, CaseIterable {
     var title: String {
         switch self {
         case .timer:
-            "Timer"
+            FocusTimerConfiguration.title
         case .settings:
-            "Settings"
+            AppSettingsConfiguration.title
         }
     }
 
@@ -28,22 +28,26 @@ enum AppScreens: Hashable, SelfIdentifiable, Codable, CaseIterable {
         Label(title, systemImage: image)
     }
 
-    @ViewBuilder
     var destination: some View {
-        switch self {
-        case .timer:
-            FocusTimerScreen()
-        case .settings:
-            AppSettingsScreen()
+        NavigationStack {
+            KJustStack {
+                switch self {
+                case .timer:
+                    FocusTimerScreen()
+                case .settings:
+                    AppSettingsScreen()
+                }
+            }
+            .navigationTitle(title)
         }
     }
 
     private var image: String {
         switch self {
         case .timer:
-            "timer.circle.fill"
+            FocusTimerConfiguration.systemImageName
         case .settings:
-            "gearshape.fill"
+            AppSettingsConfiguration.systemImageName
         }
     }
 }

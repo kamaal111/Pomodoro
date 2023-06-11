@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FocusTimer
 
 @main
 struct PomodoroApp: App {
@@ -13,6 +14,7 @@ struct PomodoroApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .focusTimerEnvironment()
         }
     }
 }

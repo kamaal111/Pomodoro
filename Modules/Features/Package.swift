@@ -10,11 +10,15 @@ let package = Package(
         .library(name: "FocusTimer", targets: ["FocusTimer"]),
         .library(name: "AppSettings", targets: ["AppSettings"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/Kamaalio/KamaalSwift.git", "0.8.0" ..< "0.9.0"),
+    ],
     targets: [
         .target(
             name: "FocusTimer",
-            dependencies: []),
+            dependencies: [
+                .product(name: "KamaalExtensions", package: "KamaalSwift"),
+            ]),
         .target(
             name: "AppSettings",
             dependencies: []),

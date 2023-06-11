@@ -21,6 +21,11 @@ struct AppTabView: View {
     }
 }
 
+#if DEBUG
+import FocusTimer
+
 #Preview {
     AppTabView(selection: .constant(.timer))
+        .focusTimerEnvironment()
 }
+#endif

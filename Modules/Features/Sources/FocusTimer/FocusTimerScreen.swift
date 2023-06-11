@@ -8,13 +8,27 @@
 import SwiftUI
 
 public struct FocusTimerScreen: View {
+    @EnvironmentObject private var chronos: Chronos
+
     public init() { }
 
     public var body: some View {
-        Text("Hello Kamaal")
+        VStack {
+            Text(chronos.formattedTime)
+                .font(.largeTitle)
+                .bold()
+            Button(action: { chronos.timerState == .idle ? chronos.startTimer() : chronos.stopTimer() }, label: {
+                Text(chronos.timerState == .idle ? "Start" : "Pause")
+                    .font(.title)
+                    .animation(.none)
+            })
+        }
     }
 }
 
 #Preview {
-    FocusTimerScreen()
+    NavigationView(content: {
+        FocusTimerScreen()
+            .focusTimerEnvironment()
+    })
 }

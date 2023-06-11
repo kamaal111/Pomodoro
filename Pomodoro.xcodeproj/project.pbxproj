@@ -12,6 +12,7 @@
 		2C77EF692A34CA44002492E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C77EF682A34CA44002492E8 /* Assets.xcassets */; };
 		2C77EF6D2A34CA44002492E8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C77EF6C2A34CA44002492E8 /* Preview Assets.xcassets */; };
 		2C78F22D2A352429003A97BF /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = 2C78F22C2A352429003A97BF /* Navigation */; };
+		2CB644A62A35DC0800224B06 /* FocusTimer in Frameworks */ = {isa = PBXBuildFile; productRef = 2CB644A52A35DC0800224B06 /* FocusTimer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2C78F22D2A352429003A97BF /* Navigation in Frameworks */,
+				2CB644A62A35DC0800224B06 /* FocusTimer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +123,7 @@
 			name = Pomodoro;
 			packageProductDependencies = (
 				2C78F22C2A352429003A97BF /* Navigation */,
+				2CB644A52A35DC0800224B06 /* FocusTimer */,
 			);
 			productName = Pomodoro;
 			productReference = 2C77EF5F2A34CA43002492E8 /* Pomodoro.app */;
@@ -415,6 +418,10 @@
 		2C78F22C2A352429003A97BF /* Navigation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Navigation;
+		};
+		2CB644A52A35DC0800224B06 /* FocusTimer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FocusTimer;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
