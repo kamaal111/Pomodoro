@@ -8,11 +8,6 @@
 import SwiftUI
 import KamaalExtensions
 
-enum TimerState {
-    case idle
-    case running
-}
-
 public final class Chronos: ObservableObject {
     @Published private(set) var time: TimeInterval
     @Published private(set) var timerState: TimerState = .idle

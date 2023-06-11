@@ -27,8 +27,9 @@ public struct FocusTimerScreen: View {
 }
 
 #Preview {
-    NavigationView(content: {
+    NavigationStack {
         FocusTimerScreen()
             .focusTimerEnvironment()
-    })
+            .navigationTitle("Timer")
+    }
 }
