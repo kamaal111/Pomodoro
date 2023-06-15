@@ -6,16 +6,25 @@
 //
 
 import SwiftUI
+//import KamaalLogger
 import KamaalExtensions
+import WatchConnectivity
 
-public final class Chronos: ObservableObject {
-    @Published private(set) var time: TimeInterval
+//private let logger = KamaalLogger(from: Chronos.self, failOnError: true)
+
+public final class Chronos: NSObject, ObservableObject {
+    @Published private(set) var time: TimeInterval!
     @Published private(set) var timerState: TimerState = .idle
 
     private var timer: Timer?
+    private let wcSession: WCSession = .default
 
-    init() {
-        self.time = Self.defaultTime
+    public override init() {
+        super.init()
+
+        time = Self.defaultTime
+        wcSession.delegate = self
+        wcSession.activate()
     }
 
     var formattedTime: String {
@@ -38,6 +47,9 @@ public final class Chronos: ObservableObject {
             timerState = .running
         }
 
+        wcSession.sendMessageData(TimerEvent(event: .started).toData(), replyHandler: nil) { error in
+            print("error", error)
+        }
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
             guard let self else { return }
 
@@ -48,12 +60,33 @@ public final class Chronos: ObservableObject {
     @MainActor
     func stopTimer() {
         withAnimation {
+            wcSession.sendMessageData(TimerEvent(event: .started).toData(), replyHandler: nil) { error in
+                print("error", error)
+            }
             timer?.invalidate()
             timer = nil
             timerState = .idle
         }
     }
+}
 
+extension Chronos: WCSessionDelegate {
+    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) { }
+
+    public func session(_ session: WCSession, didReceiveMessageData messageData: Data) {
+        print("messageData", messageData)
+    }
+
+    #if os(iOS)
+    public func sessionDidBecomeInactive(_ session: WCSession) { }
+
+    public func sessionDidDeactivate(_ session: WCSession) {
+        session.activate()
+    }
+    #endif
+}
+
+extension Chronos {
     private func handleRunningTimer() async {
         assert(timer != nil)
         if time <= 0 {

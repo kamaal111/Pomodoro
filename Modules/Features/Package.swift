@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Features",
-    platforms: [.iOS(.v17), .macOS(.v14)],
+    platforms: [.iOS(.v17), .macOS(.v14), .watchOS(.v10)],
     products: [
         .library(name: "FocusTimer", targets: ["FocusTimer"]),
         .library(name: "AppSettings", targets: ["AppSettings"]),
@@ -18,6 +18,7 @@ let package = Package(
             name: "FocusTimer",
             dependencies: [
                 .product(name: "KamaalExtensions", package: "KamaalSwift"),
+//                .product(name: "KamaalLogger", package: "KamaalSwift"),
             ]),
         .target(
             name: "AppSettings",

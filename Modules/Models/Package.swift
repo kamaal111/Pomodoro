@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Models",
-    platforms: [.macOS(.v11), .iOS(.v14)],
+    platforms: [.macOS(.v12), .iOS(.v15)],
     products: [
         .library(name: "Protocols", targets: ["Protocols"])
     ],
