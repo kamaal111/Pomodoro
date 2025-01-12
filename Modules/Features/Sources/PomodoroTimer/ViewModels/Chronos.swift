@@ -12,16 +12,21 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
     @Published private(set) var timerState: TimerState = .idle
 
     private var startTime: TimeInterval?
-    private var timer: Timer?
     private var dateStarted: Date?
+    private var timer: Timer?
+
+    @UserDefaultsObject(key: "chronos_snapshot", container: .appGroup)
+    private var snapshot: ChronosSnapshot?
 
     init() {
         self.time = Self.DEFAULT_TIME
+
+        Task { await hydrateFromSnapshot() }
     }
 
     var formattedTime: String {
         assert(time >= 0, "Although handled time should not be set to an negative number")
-        let timeValue = timeval(tv_sec: Int(time > 0 ? time : 0), tv_usec: 0)
+        let timeValue = timeval(tv_sec: Int(max(time, 0)), tv_usec: 0)
         let duration = Duration(timeValue).formatted(.time(pattern: .minuteSecond))
 
         return duration
@@ -42,14 +47,9 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
         startTime = time
         timerState = .running
         dateStarted = .now
+        snapshot = .forRunning(startTime: startTime!, dateStarted: dateStarted!)
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
-            guard let self else { return }
-
-            Task {
-                await self.handleTimerTick(timer)
-            }
-        })
+        timer = makeScheduledTimer()
     }
 
     @MainActor
@@ -61,6 +61,7 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
         timerState = .idle
         dateStarted = nil
         startTime = nil
+        snapshot = .forIdle(time: time)
     }
 
     @MainActor
@@ -69,15 +70,47 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
         guard let startTime else { fatalError("`startTime` should be available on tick") }
 
         let elapsedTime = Date.now.timeIntervalSince(dateStarted)
-        setTimeStarted(startTime - elapsedTime)
-        if time <= 0 {
+        let newTime = startTime - elapsedTime
+        setTime(newTime)
+        if newTime <= 0 {
             stopTimer()
         }
     }
 
     @MainActor
-    private func setTimeStarted(_ time: TimeInterval) {
-        self.time = time >= 0 ? time : 0
+    private func setTime(_ time: TimeInterval) {
+        self.time = max(time, 0)
+    }
+
+    @MainActor
+    private func hydrateFromSnapshot() {
+        guard let snapshot else { return }
+
+        if snapshot.timerState == .running,
+           let snapshotStartTime = snapshot.startTime,
+           let snapshotDateStarted = snapshot.dateStarted {
+            let elapsedTime = Date.now.timeIntervalSince(snapshotDateStarted)
+            let newTime = snapshotStartTime - elapsedTime
+
+            self.startTime = snapshotStartTime
+            self.dateStarted = snapshotDateStarted
+            self.timerState = .running
+            self.time = max(newTime, 0)
+            self.timer = makeScheduledTimer()
+        } else if snapshot.timerState == .idle, let snapshotStopTime = snapshot.stopTime {
+            self.time = snapshotStopTime
+        } else {
+            // Snapshot is invalid so needs to be reset!
+            self.snapshot = nil
+        }
+    }
+
+    private func makeScheduledTimer() -> Timer {
+        Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { [weak self] timer in
+            guard let self else { return }
+
+            Task { await self.handleTimerTick(timer) }
+        })
     }
 
     private static let DEFAULT_TIME = 25 * TimeConstants.oneMinute
