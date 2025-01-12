@@ -6,7 +6,15 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2C10C4512D340D08006182AF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 2C10C4502D340D08006182AF /* README.md */; };
+		2C10C4532D340D10006182AF /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 2C10C4522D340D10006182AF /* LICENSE */; };
+		2C2FEFDF2D340F70005F0440 /* PomodoroTimer in Frameworks */ = {isa = PBXBuildFile; productRef = 2C2FEFDE2D340F70005F0440 /* PomodoroTimer */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
+		2C10C4502D340D08006182AF /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2C10C4522D340D10006182AF /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		2C25AD762D33F8E700D97890 /* Pomodoro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pomodoro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -16,6 +24,11 @@
 			path = Pomodoro;
 			sourceTree = "<group>";
 		};
+		2C2FEFDB2D340D9E005F0440 /* Modules */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Modules;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C2FEFDF2D340F70005F0440 /* PomodoroTimer in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -32,7 +46,11 @@
 		2C25AD6D2D33F8E700D97890 = {
 			isa = PBXGroup;
 			children = (
+				2C10C4522D340D10006182AF /* LICENSE */,
+				2C10C4502D340D08006182AF /* README.md */,
+				2C2FEFDB2D340D9E005F0440 /* Modules */,
 				2C25AD782D33F8E700D97890 /* Pomodoro */,
+				2C2FEFDD2D340F70005F0440 /* Frameworks */,
 				2C25AD772D33F8E700D97890 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -43,6 +61,13 @@
 				2C25AD762D33F8E700D97890 /* Pomodoro.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2C2FEFDD2D340F70005F0440 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -65,6 +90,7 @@
 			);
 			name = Pomodoro;
 			packageProductDependencies = (
+				2C2FEFDE2D340F70005F0440 /* PomodoroTimer */,
 			);
 			productName = Pomodoro;
 			productReference = 2C25AD762D33F8E700D97890 /* Pomodoro.app */;
@@ -109,6 +135,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C10C4512D340D08006182AF /* README.md in Resources */,
+				2C10C4532D340D10006182AF /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +282,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -274,9 +303,9 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 2.2;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -293,6 +322,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -313,9 +343,9 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				XROS_DEPLOYMENT_TARGET = 2.2;
+				XROS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -341,6 +371,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C2FEFDE2D340F70005F0440 /* PomodoroTimer */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PomodoroTimer;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2C25AD6E2D33F8E700D97890 /* Project object */;
 }
