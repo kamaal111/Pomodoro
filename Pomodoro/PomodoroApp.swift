@@ -2,19 +2,31 @@
 //  PomodoroApp.swift
 //  Pomodoro
 //
-//  Created by Kamaal Farah on 10/06/2023.
+//  Created by Kamaal M Farah on 1/12/25.
 //
 
 import SwiftUI
-import FocusTimer
+import SwiftData
 
 @main
 struct PomodoroApp: App {
+    var sharedModelContainer: ModelContainer = {
+        let schema = Schema([
+            Item.self,
+        ])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+        do {
+            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+        } catch {
+            fatalError("Could not create ModelContainer: \(error)")
+        }
+    }()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .focusTimerEnvironment()
         }
+        .modelContainer(sharedModelContainer)
     }
 }
