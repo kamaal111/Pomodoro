@@ -13,7 +13,19 @@ public struct PomodoroTimerScreen: View {
     public init() { }
 
     public var body: some View {
-        Text(chronos.formattedTime).font(.largeTitle).bold()
+        VStack {
+            Text(chronos.formattedTime)
+                .font(.largeTitle)
+                .bold()
+            StartPauseButton(state: chronos.timerState, action: startPauseAction)
+        }
+    }
+
+    private func startPauseAction() {
+        switch chronos.timerState {
+        case .idle: chronos.startTimer()
+        case .running: chronos.stopTimer()
+        }
     }
 }
 

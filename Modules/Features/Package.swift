@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "Features",
     defaultLocalization: "en",
-    platforms: [.macOS(.v14), .iOS(.v17)],
+    platforms: [.macOS(.v14), .iOS(.v18)],
     products: [
         .library(name: "PomodoroTimer", targets: ["PomodoroTimer"]),
     ],

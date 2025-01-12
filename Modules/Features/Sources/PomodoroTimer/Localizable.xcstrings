@@ -1,7 +1,10 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "PomodoroTimerScreen" : {
+    "Pause" : {
+
+    },
+    "Start" : {
 
     }
   },
