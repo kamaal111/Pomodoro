@@ -17,7 +17,7 @@ struct Sidebar: View {
     }
 
     init () {
-        self.init(minWidth: 180, idealWidth: 200)
+        self.init(minWidth: Self.DEFAULT_MIN_WIDTH, idealWidth: Self.DEFAULT_IDEAL_WIDTH)
     }
 
     var body: some View {
@@ -32,8 +32,12 @@ struct Sidebar: View {
         }
         .navigationSplitViewColumnWidth(min: minWidth, ideal: idealWidth)
     }
+
+    private static let DEFAULT_MIN_WIDTH: CGFloat = 180
+    private static let DEFAULT_IDEAL_WIDTH: CGFloat = 200
 }
 
 #Preview {
-    Sidebar()
+    NavigationSplitView(sidebar: { Sidebar() }, detail: { Text("Details") })
+        .previewEnvironment()
 }

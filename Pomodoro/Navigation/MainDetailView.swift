@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import PomodoroTimer
 
 struct MainDetailView: View {
     var body: some View {
-        Text("Detail")
+        PomodoroTimerScreen()
     }
 }
 

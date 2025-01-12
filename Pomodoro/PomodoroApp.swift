@@ -7,10 +7,19 @@
 
 import SwiftUI
 import SwiftData
+import PomodoroTimer
 
 @main
 struct PomodoroApp: App {
-    var sharedModelContainer: ModelContainer = {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .pomodoroTimerEnvironment()
+        }
+        .modelContainer(sharedModelContainer)
+    }
+
+    private var sharedModelContainer: ModelContainer = {
         let schema = Schema([])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
@@ -20,11 +29,4 @@ struct PomodoroApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
-        .modelContainer(sharedModelContainer)
-    }
 }

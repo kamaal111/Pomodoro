@@ -25,4 +25,5 @@ struct AppNavigation: View {
 
 #Preview {
     AppNavigation()
+        .previewEnvironment()
 }
