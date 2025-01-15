@@ -11,15 +11,23 @@ struct AppNavigation: View {
     @State private var selectedTab: Screens = .pomodoro
 
     var body: some View {
-        #if os(macOS)
-        NavigationSplitView(sidebar: { Sidebar() }, detail: { MainDetailView() })
-        #else
-        TabView(selection: $selectedTab) {
-            Tab(Screens.pomodoro.title, image: Screens.pomodoro.imageName, value: .pomodoro) {
-                MainDetailView()
+        if withNavigation {
+            #if os(macOS)
+            NavigationSplitView(sidebar: { Sidebar() }, detail: { MainDetailView() })
+            #else
+            TabView(selection: $selectedTab) {
+                Tab(Screens.pomodoro.title, image: Screens.pomodoro.imageName, value: .pomodoro) {
+                    MainDetailView()
+                }
             }
+            #endif
+        } else {
+            MainDetailView()
         }
-        #endif
+    }
+
+    private var withNavigation: Bool {
+        Screens.allCases.count > 1
     }
 }
 
