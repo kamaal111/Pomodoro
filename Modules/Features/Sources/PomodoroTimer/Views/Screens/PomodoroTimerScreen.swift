@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 public struct PomodoroTimerScreen: View {
     @EnvironmentObject private var chronos: Chronos
@@ -13,11 +14,23 @@ public struct PomodoroTimerScreen: View {
     public init() { }
 
     public var body: some View {
-        VStack {
-            Text(chronos.formattedTime)
-                .font(.largeTitle)
-                .bold()
-            StartPauseButton(state: chronos.timerState, action: startPauseAction)
+        NavigationStack {
+            VStack {
+                Text(chronos.formattedTime)
+                    .font(.largeTitle)
+                    .bold()
+                    .padding(.vertical, .extraSmall)
+                HStack(spacing: AppSizes.extraLarge.rawValue) {
+                    StartPauseButton(state: chronos.timerState, action: startPauseAction)
+                    AppButton(variant: .plain, action: chronos.restartTimer) {
+                        AppLabel(variant: .action) {
+                            Text("Restart")
+                                .font(.title)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("Pomodoro")
         }
     }
 
@@ -32,5 +45,7 @@ public struct PomodoroTimerScreen: View {
 #Preview {
     PomodoroTimerScreen()
         .previewEnvironment(initialChronosSnapshot: .forIdle(time: 100))
+        #if os(macOS)
         .frame(width: 400, height: 200)
+        #endif
 }

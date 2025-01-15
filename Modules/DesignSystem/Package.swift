@@ -4,16 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "Features",
-    defaultLocalization: "en",
+    name: "DesignSystem",
     platforms: [.macOS(.v14), .iOS(.v18)],
     products: [
-        .library(name: "PomodoroTimer", targets: ["PomodoroTimer"]),
-    ],
-    dependencies: [
-        .package(path: "../DesignSystem")
+        .library(name: "DesignSystem", targets: ["DesignSystem"]),
     ],
     targets: [
-        .target(name: "PomodoroTimer", dependencies: ["DesignSystem"]),
+        .target(name: "DesignSystem"),
     ]
 )

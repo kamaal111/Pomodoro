@@ -6,15 +6,18 @@
 //
 
 import SwiftUI
+import DesignSystem
 
 struct StartPauseButton: View {
     let state: TimerState
     let action: () -> Void
 
     var body: some View {
-        Button(action: action, label: {
-            Text(label)
-                .font(.title)
+        AppButton(variant: .plain, action: action, label: {
+            AppLabel(variant: .action) {
+                Text(label)
+            }
+            .font(.title)
         })
     }
 

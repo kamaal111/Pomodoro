@@ -33,6 +33,15 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
     }
 
     @MainActor
+    func restartTimer() {
+        if timer != nil {
+            stopTimer()
+        }
+        time = Self.DEFAULT_TIME
+        snapshot = .forIdle(time: time)
+    }
+
+    @MainActor
     func startTimer() {
         assert(timer == nil)
         assert(timerState == .idle)
