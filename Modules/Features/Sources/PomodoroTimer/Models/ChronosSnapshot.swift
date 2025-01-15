@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChronosSnapshot: Codable {
+public struct ChronosSnapshot: Codable, Sendable {
     let timerState: TimerState
     let startTime: TimeInterval?
     let dateStarted: Date?
@@ -20,11 +20,11 @@ struct ChronosSnapshot: Codable {
         self.stopTime = stopTime
     }
 
-    static func forIdle(time: TimeInterval) -> ChronosSnapshot {
+    public static func forIdle(time: TimeInterval) -> ChronosSnapshot {
         .init(timerState: .idle, startTime: nil, dateStarted: nil, stopTime: time)
     }
 
-    static func forRunning(startTime: TimeInterval, dateStarted: Date) -> ChronosSnapshot {
+    public static func forRunning(startTime: TimeInterval, dateStarted: Date) -> ChronosSnapshot {
         .init(timerState: .running, startTime: startTime, dateStarted: dateStarted, stopTime: nil)
     }
 }

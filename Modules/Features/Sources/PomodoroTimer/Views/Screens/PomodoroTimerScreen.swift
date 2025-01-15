@@ -31,6 +31,6 @@ public struct PomodoroTimerScreen: View {
 
 #Preview {
     PomodoroTimerScreen()
-        .previewEnvironment()
+        .previewEnvironment(initialChronosSnapshot: .forIdle(time: 100))
         .frame(width: 400, height: 200)
 }

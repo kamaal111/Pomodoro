@@ -9,7 +9,7 @@ import SwiftUI
 import PomodoroTimer
 
 extension View {
-    func previewEnvironment() -> some View {
-        self.pomodoroTimerEnvironment()
+    func previewEnvironment(initialChronosSnapshot: ChronosSnapshot? = nil) -> some View {
+        self.pomodoroTimerEnvironment(initialChronosSnapshot: initialChronosSnapshot)
     }
 }

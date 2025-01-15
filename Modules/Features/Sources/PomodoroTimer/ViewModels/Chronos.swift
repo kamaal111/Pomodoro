@@ -15,13 +15,13 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
     private var dateStarted: Date?
     private var timer: Timer?
 
-    @UserDefaultsObject(key: "chronos_snapshot", container: .appGroup)
+    @UserDefaultsObject(key: "chronos_snapshot")
     private var snapshot: ChronosSnapshot?
 
-    init() {
+    init(snapshot: ChronosSnapshot?) {
         self.time = Self.DEFAULT_TIME
 
-        Task { await hydrateFromSnapshot() }
+        Task { await hydrateFromSnapshot(snapshot) }
     }
 
     var formattedTime: String {
@@ -83,8 +83,8 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
     }
 
     @MainActor
-    private func hydrateFromSnapshot() {
-        guard let snapshot else { return }
+    private func hydrateFromSnapshot(_ snapshot: ChronosSnapshot?) {
+        guard let snapshot = snapshot ?? self.snapshot else { return }
 
         if snapshot.timerState == .running,
            let snapshotStartTime = snapshot.startTime,

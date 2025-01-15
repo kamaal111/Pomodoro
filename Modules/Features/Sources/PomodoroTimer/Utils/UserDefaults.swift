@@ -7,10 +7,6 @@
 
 import Foundation
 
-extension UserDefaults: @unchecked @retroactive Sendable {
-    static let appGroup = UserDefaults(suiteName: "group.io.kamaal.Pomodoro")!
-}
-
 @propertyWrapper
 class UserDefaultsObject<Value: Codable> {
     let key: String
