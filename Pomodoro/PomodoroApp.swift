@@ -20,7 +20,7 @@ struct PomodoroApp: App {
     }
 
     private var sharedModelContainer: ModelContainer = {
-        let schema = Schema([])
+        let schema = Schema([StoredTodo.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {

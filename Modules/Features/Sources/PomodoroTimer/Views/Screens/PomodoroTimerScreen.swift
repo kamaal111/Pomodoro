@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 import DesignSystem
 
 public struct PomodoroTimerScreen: View {
-    @State private var newTask = ""
-    @State private var tasks: [AppTask] = []
+    @Environment(\.modelContext) private var modelContext
+
+    @Query(sort: \StoredTodo.creationDate) private var todos: [StoredTodo]
+
+    @State private var newTodo = ""
 
     public init() { }
 
@@ -18,24 +22,24 @@ public struct PomodoroTimerScreen: View {
         NavigationStack {
             VStack {
                 TimerView()
-                List(tasks) { task in
-                    Text(task.title)
+                List(todos) { todo in
+                    Text(todo.title)
                 }
                 .scrollContentBackground(.hidden)
                 .takeSizeEagerly(alignment: .top)
                 HStack {
-                    AppTextField(text: $newTask, title: NSLocalizedString("New Task", comment: ""))
+                    AppTextField(text: $newTodo, title: NSLocalizedString("New ToDo", comment: ""))
                         .submitLabel(.done)
-                        .onSubmit(submitNewTask)
-                    AppButton(variant: .plain, action: submitNewTask, label: {
+                        .onSubmit(submitNewTodo)
+                    AppButton(variant: .plain, action: submitNewTodo, label: {
                         AppLabel(variant: .action) {
                             Text("Add")
                         }
                     })
                     .padding(.top, 8)
-                    .disabled(submitNewTaskIsDisabled)
+                    .disabled(submitNewTodoIsDisabled)
                 }
-                .applyIf(tasks.isEmpty, transformation: { view in view.takeSizeEagerly(alignment: .bottom) })
+                .applyIf(todos.isEmpty, transformation: { view in view.takeSizeEagerly(alignment: .bottom) })
             }
             .padding(.all, .medium)
             .takeSizeEagerly(alignment: .top)
@@ -43,19 +47,20 @@ public struct PomodoroTimerScreen: View {
         }
     }
 
-    private var formattedNewTask: String {
-        newTask.trimmingCharacters(in: .whitespacesAndNewlines)
+    private var formattedNewTodo: String {
+        newTodo.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    private var submitNewTaskIsDisabled: Bool {
-        formattedNewTask.isEmpty
+    private var submitNewTodoIsDisabled: Bool {
+        formattedNewTodo.isEmpty
     }
 
-    private func submitNewTask() {
-        guard !submitNewTaskIsDisabled else { return }
+    private func submitNewTodo() {
+        guard !submitNewTodoIsDisabled else { return }
 
-        tasks.append(.new(title: newTask))
-        newTask = ""
+        StoredTodo.create(title: formattedNewTodo, context: modelContext)
+
+        newTodo = ""
     }
 }
 
