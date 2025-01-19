@@ -9,35 +9,21 @@ import SwiftUI
 import DesignSystem
 
 public struct PomodoroTimerScreen: View {
-    @EnvironmentObject private var chronos: Chronos
+    @State private var newTask = ""
 
     public init() { }
 
     public var body: some View {
         NavigationStack {
             VStack {
-                Text(chronos.formattedTime)
-                    .font(.largeTitle)
-                    .bold()
-                    .padding(.vertical, .extraSmall)
-                HStack(spacing: AppSizes.extraLarge.rawValue) {
-                    StartPauseButton(state: chronos.timerState, action: startPauseAction)
-                    AppButton(variant: .plain, action: chronos.restartTimer) {
-                        AppLabel(variant: .action) {
-                            Text("Restart")
-                                .font(.title)
-                        }
-                    }
-                }
+                TimerView()
+                AppTextField(text: $newTask, title: NSLocalizedString("New Task", comment: ""))
+                    .submitLabel(.done)
+                    .takeSizeEagerly(alignment: .bottom)
             }
+            .padding(.all, .medium)
+            .takeSizeEagerly(alignment: .top)
             .navigationTitle("Pomodoro")
-        }
-    }
-
-    private func startPauseAction() {
-        switch chronos.timerState {
-        case .idle: chronos.startTimer()
-        case .running: chronos.stopTimer()
         }
     }
 }
