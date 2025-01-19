@@ -15,4 +15,9 @@ extension View {
     public func takeWidthEagerly(alignment: Alignment = .center) -> some View {
         frame(maxWidth: .infinity, alignment: alignment)
     }
+
+    @ViewBuilder
+    public func applyIf(_ condition: Bool, transformation: (_ view: Self) -> some View) -> some View {
+        if condition { transformation(self) } else { self }
+    }
 }

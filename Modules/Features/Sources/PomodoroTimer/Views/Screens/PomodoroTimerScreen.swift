@@ -10,6 +10,7 @@ import DesignSystem
 
 public struct PomodoroTimerScreen: View {
     @State private var newTask = ""
+    @State private var tasks: [AppTask] = []
 
     public init() { }
 
@@ -17,14 +18,44 @@ public struct PomodoroTimerScreen: View {
         NavigationStack {
             VStack {
                 TimerView()
-                AppTextField(text: $newTask, title: NSLocalizedString("New Task", comment: ""))
-                    .submitLabel(.done)
-                    .takeSizeEagerly(alignment: .bottom)
+                List(tasks) { task in
+                    Text(task.title)
+                }
+                .scrollContentBackground(.hidden)
+                .takeSizeEagerly(alignment: .top)
+                HStack {
+                    AppTextField(text: $newTask, title: NSLocalizedString("New Task", comment: ""))
+                        .submitLabel(.done)
+                        .onSubmit(submitNewTask)
+                    AppButton(variant: .plain, action: submitNewTask, label: {
+                        AppLabel(variant: .action) {
+                            Text("Add")
+                        }
+                    })
+                    .padding(.top, 8)
+                    .disabled(submitNewTaskIsDisabled)
+                }
+                .applyIf(tasks.isEmpty, transformation: { view in view.takeSizeEagerly(alignment: .bottom) })
             }
             .padding(.all, .medium)
             .takeSizeEagerly(alignment: .top)
             .navigationTitle("Pomodoro")
         }
+    }
+
+    private var formattedNewTask: String {
+        newTask.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var submitNewTaskIsDisabled: Bool {
+        formattedNewTask.isEmpty
+    }
+
+    private func submitNewTask() {
+        guard !submitNewTaskIsDisabled else { return }
+
+        tasks.append(.new(title: newTask))
+        newTask = ""
     }
 }
 
