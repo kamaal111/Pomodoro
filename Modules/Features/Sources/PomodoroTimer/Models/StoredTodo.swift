@@ -24,6 +24,10 @@ public final class StoredTodo: Identifiable {
         self.updatedDate = updatedDate
     }
 
+    var isCompleted: Bool {
+        completionDate != nil
+    }
+
     var defaultedUpdatedDate: Date {
         updatedDate ?? .now
     }
