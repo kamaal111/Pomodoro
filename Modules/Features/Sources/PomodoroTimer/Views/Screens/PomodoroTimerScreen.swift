@@ -28,6 +28,7 @@ public struct PomodoroTimerScreen: View {
             .padding(.all, .medium)
             .takeSizeEagerly(alignment: .top)
             .navigationTitle("Pomodoro")
+            .frame(minWidth: 200, minHeight: 300)
         }
     }
 
