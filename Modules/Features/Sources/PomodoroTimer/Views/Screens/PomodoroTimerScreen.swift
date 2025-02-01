@@ -44,7 +44,7 @@ public struct PomodoroTimerScreen: View {
 
 #Preview {
     PomodoroTimerScreen()
-        .previewEnvironment(initialChronosSnapshot: .forIdle(time: 100))
+        .previewEnvironment(initialChronosSnapshot: .forIdle(mode: .focus, time: 100))
         #if os(macOS)
         .frame(width: 400, height: 200)
         #endif

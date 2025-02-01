@@ -10,6 +10,7 @@ import SwiftUI
 public final class Chronos: ObservableObject, @unchecked Sendable {
     @Published private var time: TimeInterval
     @Published private(set) var timerState: TimerState = .idle
+    @Published private(set) var mode: PomodoroModes = .focus
 
     private var startTime: TimeInterval?
     private var dateStarted: Date?
@@ -19,10 +20,11 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
     private var snapshot: ChronosSnapshot?
 
     init(snapshot: ChronosSnapshot?) {
-        self.time = Self.DEFAULT_TIME
+        self.time = PomodoroModes.focus.defaultStartTime
 
         Task { await hydrateFromSnapshot(snapshot) }
     }
+
 
     var formattedTime: String {
         assert(time >= 0, "Although handled time should not be set to an negative number")
@@ -37,28 +39,23 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
         if timer != nil {
             stopTimer()
         }
-        time = Self.DEFAULT_TIME
-        snapshot = .forIdle(time: time)
+        time = mode.defaultStartTime
+        snapshot = .forIdle(mode: mode, time: time)
     }
 
     @MainActor
-    func startTimer() {
+    func startSwitchingMode() {
+        startTimer(withMode: mode.toggled)
+    }
+
+    @MainActor
+    func startMode() {
         assert(timer == nil)
         assert(timerState == .idle)
         assert(dateStarted == nil)
         assert(startTime == nil)
 
-        withAnimation {
-            if time <= 0 {
-                time = Self.DEFAULT_TIME
-            }
-        }
-        startTime = time
-        timerState = .running
-        dateStarted = .now
-        snapshot = .forRunning(startTime: startTime!, dateStarted: dateStarted!)
-
-        timer = makeScheduledTimer()
+        startTimer(withMode: mode)
     }
 
     @MainActor
@@ -70,11 +67,29 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
         timerState = .idle
         dateStarted = nil
         startTime = nil
-        snapshot = .forIdle(time: time)
+        snapshot = .forIdle(mode: mode, time: time)
+    }
+
+    @MainActor
+    private func startTimer(withMode mode: PomodoroModes) {
+        let modeHasChange = self.mode != mode
+        withAnimation {
+            if time <= 0 || modeHasChange {
+                time = mode.defaultStartTime
+            }
+        }
+        startTime = time
+        timerState = .running
+        dateStarted = .now
+        self.mode = mode
+        snapshot = .forRunning(mode: mode, startTime: startTime!, dateStarted: dateStarted!)
+
+        timer = makeScheduledTimer()
     }
 
     @MainActor
     private func handleTimerTick(_: Timer) {
+        guard timerState == .running else { return }
         guard let dateStarted else { fatalError("`dateStarted` should be available on tick") }
         guard let startTime else { fatalError("`startTime` should be available on tick") }
 
@@ -94,6 +109,9 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
     @MainActor
     private func hydrateFromSnapshot(_ snapshot: ChronosSnapshot?) {
         guard let snapshot = snapshot ?? self.snapshot else { return }
+
+        self.mode = snapshot.mode
+        self.time = snapshot.mode.defaultStartTime
 
         if snapshot.timerState == .running,
            let snapshotStartTime = snapshot.startTime,
@@ -121,6 +139,4 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
             Task { await self.handleTimerTick(timer) }
         })
     }
-
-    private static let DEFAULT_TIME = 25 * TimeConstants.oneMinute
 }
