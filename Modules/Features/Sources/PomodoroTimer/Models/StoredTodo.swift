@@ -5,8 +5,14 @@
 //  Created by Kamaal M Farah on 1/19/25.
 //
 
+import OSLog
 import SwiftData
 import Foundation
+
+private let logger = Logger(
+    subsystem: Bundle.main.bundleIdentifier!,
+    category: String(describing: StoredTodo.self)
+)
 
 @Model
 public final class StoredTodo: Identifiable {
@@ -41,6 +47,12 @@ public final class StoredTodo: Identifiable {
         return save()
     }
 
+    static func list(context: ModelContext) throws -> [StoredTodo] {
+        let fetchDescriptor = FetchDescriptor<StoredTodo>()
+
+        return try context.fetch(fetchDescriptor)
+    }
+
     @discardableResult
     static func create(title: String, context: ModelContext) -> StoredTodo {
         let task = StoredTodo.newInstance(title: title)
@@ -59,6 +71,7 @@ public final class StoredTodo: Identifiable {
         do {
             try context.save()
         } catch {
+            logger.error("Failed to save StoredTodo; error='\(error)'")
             assertionFailure()
         }
 

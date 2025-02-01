@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-import SwiftData
 import DesignSystem
 
 public struct PomodoroTimerScreen: View {
-    @Environment(\.modelContext) private var modelContext
-
-    @Query(sort: \StoredTodo.creationDate) private var todos: [StoredTodo]
+    @EnvironmentObject private var todoManager: TodoManager
 
     public init() { }
 
@@ -23,7 +20,10 @@ public struct PomodoroTimerScreen: View {
                 TodoListView()
                     .takeSizeEagerly(alignment: .top)
                 AddTodoField(submit: submitNewTodo)
-                    .applyIf(todos.isEmpty, transformation: { view in view.takeSizeEagerly(alignment: .bottom) })
+                    .applyIf(
+                        todoManager.todos.isEmpty,
+                        transformation: { view in view.takeSizeEagerly(alignment: .bottom) }
+                    )
             }
             .padding(.all, .medium)
             .takeSizeEagerly(alignment: .top)
@@ -33,19 +33,11 @@ public struct PomodoroTimerScreen: View {
     }
 
     private func submitNewTodo(_ newTodo: String) {
-        guard !newTodo.isEmpty else {
-            assertionFailure()
-            return
-        }
-
-        StoredTodo.create(title: newTodo, context: modelContext)
+        Task { await todoManager.createTodo(withTitle: newTodo) }
     }
 }
 
 #Preview {
     PomodoroTimerScreen()
         .previewEnvironment(initialChronosSnapshot: .forIdle(mode: .focus, time: 100))
-        #if os(macOS)
-        .frame(width: 400, height: 200)
-        #endif
 }

@@ -10,12 +10,10 @@ import SwiftData
 import DesignSystem
 
 struct TodoListView: View {
-    @Environment(\.modelContext) private var modelContext
-
-    @Query(sort: \StoredTodo.creationDate) private var todos: [StoredTodo]
+    @EnvironmentObject private var todoManager: TodoManager
 
     var body: some View {
-        List(todos) { todo in
+        List(todoManager.todos) { todo in
             AppToggleWithChangeHandler(
                 todo.title,
                 wrappedValue: todo.isCompleted,
@@ -26,7 +24,7 @@ struct TodoListView: View {
     }
 
     private func handleTodoToggle(_ todo: StoredTodo) {
-        todo.toggle()
+        todoManager.toggleTodo(todo)
     }
 }
 

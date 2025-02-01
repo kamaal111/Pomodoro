@@ -6,9 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 extension View {
     func previewEnvironment(initialChronosSnapshot: ChronosSnapshot? = nil) -> some View {
-        self.pomodoroTimerEnvironment(initialChronosSnapshot: initialChronosSnapshot)
+        let schema = Schema([StoredTodo.self])
+        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+        let modelContainer = try! ModelContainer(for: schema, configurations: [modelConfiguration])
+        let todoManager = TodoManager(modelContext: modelContainer.mainContext)
+
+        return self.pomodoroTimerEnvironment(todoManager: todoManager, initialChronosSnapshot: initialChronosSnapshot)
     }
 }

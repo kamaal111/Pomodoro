@@ -11,15 +11,21 @@ import PomodoroTimer
 
 @main
 struct PomodoroApp: App {
+    @State private var todoManager: TodoManager
+
+    init() {
+        self.todoManager = TodoManager(modelContext: Self.sharedModelContainer.mainContext)
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .pomodoroTimerEnvironment()
+                .pomodoroTimerEnvironment(todoManager: todoManager)
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(Self.sharedModelContainer)
     }
 
-    private var sharedModelContainer: ModelContainer = {
+    private static var sharedModelContainer: ModelContainer = {
         let schema = Schema([StoredTodo.self])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

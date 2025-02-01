@@ -8,20 +8,29 @@
 import SwiftUI
 
 extension View {
-    public func pomodoroTimerEnvironment(initialChronosSnapshot: ChronosSnapshot? = nil) -> some View {
-        self.modifier(PomodoroTimerEnvironment(initialChronosSnapshot: initialChronosSnapshot))
+    public func pomodoroTimerEnvironment(
+        todoManager: TodoManager,
+        initialChronosSnapshot: ChronosSnapshot? = nil
+    ) -> some View {
+        self.modifier(PomodoroTimerEnvironment(
+            todoManager: todoManager,
+            initialChronosSnapshot: initialChronosSnapshot
+        ))
     }
 }
 
 private struct PomodoroTimerEnvironment: ViewModifier {
     @State private var chronos: Chronos
+    @State private var todoManager: TodoManager
 
-    init(initialChronosSnapshot: ChronosSnapshot?) {
+    init(todoManager: TodoManager, initialChronosSnapshot: ChronosSnapshot?) {
+        self.todoManager = todoManager
         self.chronos = Chronos(snapshot: initialChronosSnapshot)
     }
 
     func body(content: Content) -> some View {
         content
+            .environmentObject(todoManager)
             .environmentObject(chronos)
     }
 }
