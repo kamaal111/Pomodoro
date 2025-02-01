@@ -11,6 +11,8 @@ import DesignSystem
 public struct PomodoroTimerScreen: View {
     @EnvironmentObject private var todoManager: TodoManager
 
+    @State private var editMode: EditMode = .inactive
+
     public init() { }
 
     public var body: some View {
@@ -28,7 +30,13 @@ public struct PomodoroTimerScreen: View {
             .padding(.all, .medium)
             .takeSizeEagerly(alignment: .top)
             .navigationTitle("Pomodoro")
+            .toolbar(content: {
+                ToolbarItem(placement: .automatic) {
+                    EditButton()
+                }
+            })
             .frame(minWidth: 200, minHeight: 300)
+            .environment(\.editMode, $editMode)
         }
     }
 

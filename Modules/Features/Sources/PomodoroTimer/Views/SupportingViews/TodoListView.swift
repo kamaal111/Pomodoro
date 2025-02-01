@@ -13,12 +13,14 @@ struct TodoListView: View {
     @EnvironmentObject private var todoManager: TodoManager
 
     var body: some View {
-        List(todoManager.todos) { todo in
-            AppToggleWithChangeHandler(
-                todo.title,
-                wrappedValue: todo.isCompleted,
-                onChange: { _ in handleTodoToggle(todo) }
-            )
+        Form {
+            List(todoManager.todos) { todo in
+                AppToggleWithChangeHandler(
+                    todo.title,
+                    wrappedValue: todo.isCompleted,
+                    onChange: { _ in handleTodoToggle(todo) }
+                )
+            }
         }
         .scrollContentBackground(.hidden)
     }
