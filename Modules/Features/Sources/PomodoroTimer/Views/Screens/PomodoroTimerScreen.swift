@@ -22,6 +22,7 @@ public struct PomodoroTimerScreen: View {
                 TodoListView()
                     .takeSizeEagerly(alignment: .top)
                 AddTodoField(submit: submitNewTodo)
+                    .disabled(editMode.isEditing)
                     .applyIf(
                         todoManager.todos.isEmpty,
                         transformation: { view in view.takeSizeEagerly(alignment: .bottom) }

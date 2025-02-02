@@ -16,4 +16,5 @@ struct MainDetailView: View {
 
 #Preview {
     MainDetailView()
+        .previewEnvironment()
 }

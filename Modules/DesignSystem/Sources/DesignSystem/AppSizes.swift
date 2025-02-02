@@ -23,6 +23,14 @@ public enum AppSizes: CGFloat {
     case large = 24
     /// Size of 32
     case extraLarge = 32
+
+    public static func +(lhs: CGFloat, rhs: AppSizes) -> CGFloat {
+        lhs + rhs.rawValue
+    }
+
+    public static func +(lhs: AppSizes, rhs: CGFloat) -> CGFloat {
+        lhs.rawValue + rhs
+    }
 }
 
 extension View {

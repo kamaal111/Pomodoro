@@ -22,7 +22,7 @@ public final class StoredTodo: Identifiable {
     private(set) var creationDate: Date
     private(set) var updatedDate: Date?
 
-    private init(id: UUID, title: String, completionDate: Date?, creationDate: Date, updatedDate: Date?) {
+    init(id: UUID, title: String, completionDate: Date?, creationDate: Date, updatedDate: Date?) {
         self.id = id
         self.title = title
         self.completionDate = completionDate
@@ -45,6 +45,15 @@ public final class StoredTodo: Identifiable {
         updatedDate = date
 
         return save()
+    }
+
+    func delete() {
+        guard let context = modelContext else {
+            assertionFailure()
+            return
+        }
+
+        context.delete(self)
     }
 
     static func list(context: ModelContext) throws -> [StoredTodo] {

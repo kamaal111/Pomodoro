@@ -51,7 +51,28 @@ public final class TodoManager: @unchecked Sendable, ObservableObject {
     }
 
     @MainActor
-    private func fetchTodos() async {
+    func deleteTodo(_ todo: StoredTodo) {
+        guard let toggleIndex = todos.firstIndex(where: { $0.id == todo.id }) else {
+            assertionFailure()
+            return
+        }
+
+        todo.delete()
+        var newTodos = todos
+        newTodos.remove(at: toggleIndex)
+
+        setTodos(newTodos)
+    }
+
+    @MainActor
+    private func fetchTodos() {
+        #if DEBUG
+        if ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1" {
+            setTodos(previewTodos)
+            return
+        }
+        #endif
+
         let todos: [StoredTodo]
         do {
             todos = try StoredTodo.list(context: modelContext)
@@ -73,4 +94,16 @@ public final class TodoManager: @unchecked Sendable, ObservableObject {
         todos
             .sorted(by: { $0.creationDate.compare($1.creationDate) == .orderedDescending })
     }
+
+    #if DEBUG
+    private let previewTodos: [StoredTodo] = [
+        StoredTodo(
+            id: UUID(uuidString: "596d9d0c-614c-4681-8511-30c95fccf391")!,
+            title: "ToDo",
+            completionDate: nil,
+            creationDate: Date(timeIntervalSince1970: 1_738_503_399),
+            updatedDate: nil
+        )
+    ]
+    #endif
 }
