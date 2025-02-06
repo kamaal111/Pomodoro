@@ -25,6 +25,9 @@ public final class Chronos: ObservableObject, @unchecked Sendable {
         Task { await hydrateFromSnapshot(snapshot) }
     }
 
+    var timeToEndPercentage: Double {
+        Double(time / mode.defaultStartTime)
+    }
 
     var formattedTime: String {
         assert(time >= 0, "Although handled time should not be set to an negative number")

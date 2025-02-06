@@ -13,12 +13,15 @@ struct TimerView: View {
 
     var body: some View {
         VStack {
-            VStack {
-                Text(modeLabel)
-                    .font(.title3)
-                Text(chronos.formattedTime)
-                    .font(.title)
-                    .bold()
+            ZStack {
+                CircularProgressBar(progress: chronos.timeToEndPercentage, lineWidth: 10)
+                VStack {
+                    Text(modeLabel)
+                        .font(.title3)
+                    Text(chronos.formattedTime)
+                        .font(.title)
+                        .bold()
+                }
             }
             .padding(.vertical, .extraSmall)
             HStack(spacing: AppSizes.extraLarge.rawValue) {
@@ -76,6 +79,7 @@ struct TimerView: View {
 #Preview {
     TimerView()
         .previewEnvironment(initialChronosSnapshot: .forIdle(mode: .focus, time: 100))
+        .padding()
         #if os(macOS)
         .frame(width: 400, height: 200)
         #endif
